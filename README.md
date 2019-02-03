@@ -1,24 +1,34 @@
-# README
+# WEAR
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## DB設計
 
-Things you may want to cover:
+### users_table
+|Column|Type|Options|
+|------|----|-------|
+|nickname|string|null: false|
+|email|string|null: false, unique: true |
+|password|string|null: false|
 
-* Ruby version
+#### Assosiation
+- has_many :models, through: :favorite_models
+- has_many :favorite_models, dependent: :destroy
 
-* System dependencies
+### models_table
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false, index: true|
+|image|string|null: false|
 
-* Configuration
+#### Assosiation
+- has_many :users, through: :favorite_models
+- has_many :favorite_models, dependent: :destroy
 
-* Database creation
+### favorite_models_table
+|Column|Type|Options|
+|------|----|-------|
+|user|references|foreign_key: true|
+|model|references|foreign_key: true|
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Assosiation
+- belongs_to :model
+- belongs_to :user
