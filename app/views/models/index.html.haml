@@ -57,4 +57,12 @@
               %a{:href => "#"} Separated link
     / /.navbar-collapse
   / /.container-fluid
+
+%main.image-contents
+  .image-contents__images
+    -@models.each do |model|
+      =image_tag "#{model.image}"
+
+
+
   
